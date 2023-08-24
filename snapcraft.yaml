@@ -1,0 +1,65 @@
+name: transmission
+base: core22
+adopt-info: transmission
+grade: stable
+confinement: strict
+compression: lzo
+architectures:
+  - build-on: amd64
+  - build-on: armhf
+  - build-on: arm64
+  
+slots:
+  transmission:
+    interface: dbus
+    bus: session
+    name: com.transmissionbt.transmission
+
+apps:
+  transmission:
+    command: usr/bin/transmission-gtk
+    extensions: [gnome]
+    common-id: com.transmissionbt.transmission
+    desktop: usr/share/applications/transmission-gtk.desktop
+    plugs:
+      - home
+      - network
+      - network-bind
+      - network-status
+      - removable-media
+      - optical-drive
+      - unity7
+      - screen-inhibit-control
+      
+parts:
+  transmission:
+    source: https://github.com/transmission/transmission.git
+    source-tag: 4.0.4
+    plugin: cmake
+    parse-info: [usr/share/metainfo/transmission-gtk.metainfo.xml]
+    cmake-parameters:
+      - -DCMAKE_BUILD_TYPE=Release
+      - -DCMAKE_INSTALL_PREFIX=/usr
+    build-packages:
+      - libcurl4-openssl-dev
+      - libminiupnpc-dev
+      - libssl-dev
+      - libnatpmp-dev
+    build-snaps:
+      - cmake
+    override-pull: |
+      craftctl default
+      craftctl set version=$(git describe --tags --abbrev=0)
+    stage-packages:
+      - libminiupnpc17
+      - libnatpmp1
+      
+  cleanup:
+    after: [transmission]
+    plugin: nil
+    build-snaps: [core22, gtk-common-themes, gnome-42-2204]
+    override-prime: |
+      set -eux
+      for snap in "core22" "gtk-common-themes" "gnome-42-2204"; do
+          cd "/snap/$snap/current" && find . -type f,l -name *.so.* -exec rm -f "$CRAFT_PRIME/{}" \;
+      done  
