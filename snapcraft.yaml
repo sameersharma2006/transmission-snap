@@ -45,8 +45,6 @@ parts:
       - libminiupnpc-dev
       - libssl-dev
       - libnatpmp-dev
-    build-snaps:
-      - cmake
     override-pull: |
       craftctl default
       craftctl set version=$(git describe --tags --abbrev=0)
