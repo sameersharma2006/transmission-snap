@@ -4,6 +4,10 @@ adopt-info: transmission
 grade: stable
 confinement: strict
 compression: lzo
+architectures:
+  - build-on: amd64
+  - build-on: armhf
+  - build-on: arm64
 
 slots:
   transmission:
@@ -26,7 +30,7 @@ apps:
       - optical-drive
       - unity7
       - screen-inhibit-control
-      
+
 parts:
   transmission:
     source: https://github.com/transmission/transmission.git
@@ -48,7 +52,7 @@ parts:
     stage-packages:
       - libminiupnpc17
       - libnatpmp1
-      
+
   cleanup:
     after: [transmission]
     plugin: nil
@@ -57,4 +61,4 @@ parts:
       set -eux
       for snap in "core22" "gtk-common-themes" "gnome-42-2204"; do
           cd "/snap/$snap/current" && find . -type f,l -name *.so.* -exec rm -f "$CRAFT_PRIME/{}" \;
-      done  
+      done
