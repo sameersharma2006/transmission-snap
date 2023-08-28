@@ -34,7 +34,7 @@ apps:
 parts:
   transmission:
     source: https://github.com/transmission/transmission.git
-    source-tag: 4.0.3
+    source-tag: 4.0.4
     plugin: cmake
     parse-info: [usr/share/metainfo/transmission-gtk.metainfo.xml]
     cmake-parameters:
