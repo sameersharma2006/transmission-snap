@@ -4,11 +4,7 @@ adopt-info: transmission
 grade: stable
 confinement: strict
 compression: lzo
-architectures:
-  - build-on: amd64
-  - build-on: armhf
-  - build-on: arm64
-  
+
 slots:
   transmission:
     interface: dbus
@@ -34,7 +30,7 @@ apps:
 parts:
   transmission:
     source: https://github.com/transmission/transmission.git
-    source-tag: 4.0.4
+    source-tag: 4.0.3
     plugin: cmake
     parse-info: [usr/share/metainfo/transmission-gtk.metainfo.xml]
     cmake-parameters:
