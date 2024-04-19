@@ -44,6 +44,7 @@ parts:
       - -DWITH_SYSTEMD=OFF
       - -DENABLE_UTILS=OFF
       - -DINSTALL_WEB=OFF
+      - -DENABLE_TESTS=OFF
     build-packages:
       - libcurl4-openssl-dev
       - libminiupnpc-dev
