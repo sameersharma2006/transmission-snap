@@ -27,7 +27,6 @@ apps:
       - network-bind
       - network-status
       - removable-media
-      - optical-drive
       - unity7
       - screen-inhibit-control
 
@@ -40,6 +39,11 @@ parts:
     cmake-parameters:
       - -DCMAKE_BUILD_TYPE=Release
       - -DCMAKE_INSTALL_PREFIX=/usr
+      - -DENABLE_DAEMON=OFF
+      - -DINSTALL_DOC=OFF
+      - -DWITH_SYSTEMD=OFF
+      - -DENABLE_UTILS=OFF
+      - -DINSTALL_WEB=OFF
     build-packages:
       - libcurl4-openssl-dev
       - libminiupnpc-dev
@@ -49,23 +53,13 @@ parts:
       craftctl default
       craftctl set version=$(git describe --tags --abbrev=0)
       sed -e 's|Icon=transmission|Icon=${SNAP}/usr/share/icons/hicolor/scalable/apps/transmission.svg|' -i gtk/transmission-gtk.desktop.in
+
+  deps:
+    after: [transmission]
+    plugin: nil
     stage-packages:
       - libminiupnpc17
       - libnatpmp1
     prime:
-      - -usr/bin/transmission-create
-      - -usr/bin/transmission-daemon
-      - -usr/bin/transmission-edit
-      - -usr/bin/transmission-show
-      - -usr/share/doc
-      - -usr/share/man
-
-  cleanup:
-    after: [transmission]
-    plugin: nil
-    build-snaps: [core22, gtk-common-themes, gnome-42-2204]
-    override-prime: |
-      set -eux
-      for snap in "core22" "gtk-common-themes" "gnome-42-2204"; do
-          cd "/snap/$snap/current" && find . -type f,l -name *.so.* -exec rm -f "$CRAFT_PRIME/{}" \;
-      done
+      - usr/lib/*/libminiupnpc*
+      - usr/lib/*/libnatpmp*
