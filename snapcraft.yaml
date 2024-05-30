@@ -42,13 +42,8 @@ parts:
       - -DCMAKE_INSTALL_PREFIX=/usr
       - -DENABLE_DAEMON=OFF
       - -DINSTALL_DOC=OFF
-      - -DWITH_SYSTEMD=OFF
       - -DENABLE_UTILS=OFF
       - -DINSTALL_WEB=OFF
-      - -DENABLE_TESTS=OFF
-      - -DWITH_APPINDICATOR=OFF
-      - -DWITH_INOTIFY=OFF
-      - -DWITH_KQUEUE=OFF
     build-packages:
       - libcurl4-openssl-dev
       - libminiupnpc-dev
