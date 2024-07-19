@@ -48,7 +48,6 @@ parts:
       - libminiupnpc-dev
       - libssl-dev
       - libnatpmp-dev
-      - libgtkmm-4.0-dev
     override-pull: |
       craftctl default
       craftctl set version=$(git describe --tags --abbrev=0)
@@ -61,8 +60,6 @@ parts:
     stage-packages:
       - libminiupnpc17
       - libnatpmp1
-      - libgtkmm-4.0-0
     prime:
       - usr/lib/*/libminiupnpc*
       - usr/lib/*/libnatpmp*
-      - usr/lib/*/libgtkmm-4.0*
