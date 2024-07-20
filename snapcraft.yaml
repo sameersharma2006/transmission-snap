@@ -42,7 +42,6 @@ parts:
       - -DENABLE_DAEMON=OFF
       - -DINSTALL_DOC=OFF
       - -DENABLE_UTILS=OFF
-      - -DINSTALL_WEB=OFF
       - -DUSE_GTK_VERSION=4
     build-packages:
       - libcurl4-openssl-dev
