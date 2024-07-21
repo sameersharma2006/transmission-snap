@@ -1,13 +1,12 @@
 name: transmission
-base: core22
+base: core24
 adopt-info: transmission
 grade: stable
 confinement: strict
 compression: lzo
-architectures:
-  - build-on: amd64
-  - build-on: armhf
-  - build-on: arm64
+platforms:
+  amd64:
+  arm64:
 
 slots:
   transmission:
@@ -43,7 +42,7 @@ parts:
       - -DENABLE_DAEMON=OFF
       - -DINSTALL_DOC=OFF
       - -DENABLE_UTILS=OFF
-      - -DINSTALL_WEB=OFF
+      - -DUSE_GTK_VERSION=4
     build-packages:
       - libcurl4-openssl-dev
       - libminiupnpc-dev
@@ -53,6 +52,7 @@ parts:
       craftctl default
       craftctl set version=$(git describe --tags --abbrev=0)
       sed -e 's|Icon=transmission|Icon=${SNAP}/usr/share/icons/hicolor/scalable/apps/transmission.svg|' -i gtk/transmission-gtk.desktop.in
+      sed -i '50d' gtk/transmission-gtk.metainfo.xml.in
 
   deps:
     after: [transmission]
