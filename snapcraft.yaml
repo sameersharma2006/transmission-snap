@@ -4,6 +4,11 @@ adopt-info: transmission
 grade: stable
 confinement: strict
 compression: lzo
+license: GPL-2.0-only
+issues:
+  - https://github.com/sameersharma2006/transmission-snap
+  - https://git.launchpad.net/transmission-snap/tree/snapcraft.yaml
+source-code: https://github.com/sameersharma2006/transmission-snap/blob/main/snapcraft.yaml
 platforms:
   amd64:
   arm64:
