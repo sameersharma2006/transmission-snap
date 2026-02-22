@@ -56,7 +56,7 @@ parts:
     override-pull: |
       craftctl default
       craftctl set version=$(git describe --tags --abbrev=0)
-      sed -e 's|Icon=transmission|Icon=${SNAP}/usr/share/icons/hicolor/scalable/apps/transmission.svg|' -i gtk/transmission-gtk.desktop.in
+      sed -e 's|Icon=transmission-gtk|Icon=${SNAP}/usr/share/icons/hicolor/scalable/apps/transmission.svg|' -i gtk/transmission-gtk.desktop.in
       sed -i '50d' gtk/transmission-gtk.metainfo.xml.in
 
   deps:
